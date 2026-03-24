@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://bd2st4grri13p"]
+
+[ext_resource type="TileSet" uid="uid://b0dxfsg6j162h" path="res://test_tileset.tres" id="1_0n0fo"]
+[ext_resource type="PackedScene" uid="uid://cwvef03s8nwd5" path="res://Objects/Player.tscn" id="1_3xrbq"]
+
+[node name="Node2D" type="Node2D" unique_id=610053290]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=970633431]
+tile_set = ExtResource("1_0n0fo")
+
+[node name="Player" parent="." unique_id=1060063200 instance=ExtResource("1_3xrbq")]

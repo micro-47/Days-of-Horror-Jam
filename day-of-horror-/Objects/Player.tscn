@@ -1,0 +1,50 @@
+[gd_scene format=3 uid="uid://cwvef03s8nwd5"]
+
+[ext_resource type="Texture2D" uid="uid://bc3mwtx8dmwlu" path="res://icon.svg" id="1_8r7yd"]
+
+[sub_resource type="GDScript" id="GDScript_8r7yd"]
+resource_name = "BasicCharacter"
+script/source = "extends CharacterBody2D
+
+
+const SPEED = 300.0
+const JUMP_VELOCITY = -400.0
+
+
+func _physics_process(delta: float) -> void:
+	# Add the gravity.
+	if not is_on_floor():
+		velocity += get_gravity() * delta
+
+	# Handle jump.
+	if Input.is_action_just_pressed(\"ui_accept\") and is_on_floor():
+		velocity.y = JUMP_VELOCITY
+
+	# Get the input direction and handle the movement/deceleration.
+	# As good practice, you should replace UI actions with custom gameplay actions.
+	var direction := Input.get_axis(\"ui_left\", \"ui_right\")
+	if direction:
+		velocity.x = direction * SPEED
+	else:
+		velocity.x = move_toward(velocity.x, 0, SPEED)
+
+	move_and_slide()
+"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n6db0"]
+size = Vector2(120, 120)
+
+[node name="Player" type="Node2D" unique_id=1060063200]
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="." unique_id=1050598939]
+script = SubResource("GDScript_8r7yd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D" unique_id=1828664201]
+shape = SubResource("RectangleShape2D_n6db0")
+
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D" unique_id=307443656]
+texture = ExtResource("1_8r7yd")
+
+[node name="Camera2D" type="Camera2D" parent="CharacterBody2D" unique_id=1940391823]
+
+[node name="AudioListener2D" type="AudioListener2D" parent="CharacterBody2D" unique_id=952995275]
